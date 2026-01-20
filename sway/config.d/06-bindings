@@ -1,0 +1,190 @@
+### Key bindings
+#
+# --- Aplicações ---
+#
+    # Terminal
+    bindsym $mod+Return exec $term
+
+    # Launcher (Rofi)
+    bindsym $mod+d exec $menu
+
+    # Menu de Energia
+    bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/powermenu.sh
+
+    # Yazi
+    bindsym $mod+y exec $term -e yazi
+
+    # Thunar
+    bindsym $mod+t exec thunar
+
+    # Pavucontrol
+    bindsym $mod+p exec pavucontrol
+
+    # Whatsapp pelo ZapZap
+    bindsym $mod+z exec flatpak run com.rtosta.zapzap
+
+    # Navegador (Exemplo, adicione se quiser)
+    # bindsym $mod+w exec firefox
+
+#
+# --- Ações de Janela ---
+#
+    # Fechar janela (Kill)
+    bindsym $mod+q kill
+
+    # Recarregar configuração
+    bindsym $mod+Shift+c reload
+
+    # Sair do Sway
+    bindsym $mod+Shift+q exec swaynag -t warning -m 'Sair do Sway?' -B 'Sim, sair' 'swaymsg exit'
+
+    # Alternar Flutuante (Floating)
+    bindsym $mod+Shift+space floating toggle
+
+    # Fullscreen
+    bindsym $mod+f fullscreen
+
+    # Foco entre Tiling/Floating
+    bindsym $mod+space focus mode_toggle
+
+    # Divisão de Janelas (Manual Tiling)
+    # Define onde a próxima janela será aberta em relação à janela focada
+    bindsym $mod+v splitv
+    bindsym $mod+s splith
+
+    # Layout (Tabbed/Stacking)
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+
+#
+# --- Scratchpad (Minimizar) ---
+#
+    # Mover para scratchpad (Esconder)
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Mostrar scratchpad (Restaurar)
+    bindsym $mod+minus scratchpad show
+
+#
+# --- Foco (Vim Keys) ---
+#
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    
+    # Com setas
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+#
+# --- Mover Janelas ---
+#
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+    # Com setas
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+
+#
+# --- Workspaces ---
+#
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+
+    bindsym $mod+Shift+1 move container to workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10
+
+#
+# --- Multimídia e Hardware ---
+#
+    # Printscreen (Grim + Slurp)
+    # Requer instalação: grim, slurp
+    # Printscreen (Menu interativo)
+    bindsym Print exec ~/.config/sway/scripts/screenshot-menu.sh
+
+    # Ctrl+Print (Cópia Rápida): Seleciona e copia para o clipboard
+    bindsym Control+Print exec grim -g "$(slurp)" - | wl-copy && notify-send "Screenshot" "Copied to clipboard"
+
+    # Shift+Print (Tela Cheia): Salva instantaneamente
+    bindsym Shift+Print exec grim ~/Pictures/Screenshots/$(date +'%Y-%m-%d-%H%M%S_screenshot.png') && notify-send "Screenshot" "Full prinscreen saved"
+
+    # Volume
+    bindsym XF86AudioRaiseVolume exec ~/.config/waybar/scripts/volume_control.sh up
+    bindsym XF86AudioLowerVolume exec ~/.config/waybar/scripts/volume_control.sh down
+    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+    # Bluetooth (Redmi Buds 6 Play)
+    # Conectar ($mod+b)
+    bindsym $mod+b exec bluetoothctl connect 00:BB:43:D5:B3:01 && notify-send -u low "Redmi Buds 6 Play" "Connected." || notify-send -u critical "Bluetooth" "Failure to connect."
+    # Desconectar ($mod+Shift+b)
+    bindsym $mod+Shift+b exec bluetoothctl disconnect 00:BB:43:D5:B3:01 && notify-send -u low "Redmi Buds 6 Play" "Disconnected."
+
+    # Clipboard History (Cliphist) - Mod+c
+    bindsym $mod+c exec bash -c 'sel=$(/home/mgl_uhou/.local/bin/cliphist list | rofi -dmenu -theme ~/.config/rofi/clipboard.rasi -p "Clipboard") && [ -n "$sel" ] && echo "$sel" | /home/mgl_uhou/.local/bin/cliphist decode | wl-copy'
+
+    # KDE Connect Clipboard (Share) - Mod+Alt+c
+    bindsym $mod+Mod1+c exec kdeconnect-cli -d b3d59fcc6fe44d60829955e228bee614 --share-text "$(wl-paste)" 
+    # Nota: xclip não funciona bem no Wayland, substitui por wl-paste (instale wl-clipboard)
+
+    bindsym $mod+F12 exec kdeconnect-cli -d b3d59fcc6fe44d60829955e228bee614 --ring
+
+    # Notificações (Dunst)
+    bindsym $mod+period exec dunstctl close
+    bindsym $mod+Shift+period exec dunstctl close-all
+    bindsym $mod+grave exec dunstctl history-pop
+    bindsym $mod+Shift+Return exec dunstctl action
+
+#
+# --- Redimensionar ---
+#
+mode "resize / move" {
+    # Redimensionar (Vim Keys)swapfile
+
+    # Aumenta a(s) janela(s) da esquerda 
+    bindsym $left resize shrink width 10px
+
+    # Aumenta a(s) janela(s) de baixo 
+    bindsym $down resize grow height 10px
+
+    # Aumenta a(s) janela(s) de cima 
+    bindsym $up resize shrink height 10px
+
+    # Aumenta a(s) janela(s) da direita 
+    bindsym $right resize grow width 10px
+
+    # Mover (Setas)
+    bindsym Left move left 20px
+    bindsym Down move down 20px
+    bindsym Up move up 20px
+    bindsym Right move right 20px
+
+    # Sair do modo
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize / move"

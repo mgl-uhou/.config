@@ -1,0 +1,3 @@
+# Polybar
+
+Polybar config files.

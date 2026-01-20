@@ -1,0 +1,25 @@
+# 1. Ignorar TUDO por padrão
+/*
+
+# 2. Não ignorar o próprio .gitignore (importante)
+!/.gitignore
+!/README.md
+
+# 3. PERMITIR (Whitelist) apenas as pastas que você quer salvar
+# Adicione a exclamação "!" na frente do que você quer versionar
+
+!/bspwm/
+!/sxhkd/
+!/nvim/
+!/dunst/
+!/fastfetch/
+!/kitty/
+!/polybar/
+!/rofi/
+!/sway/
+!/waybar/
+!/gammastep/
+!/autostart/
+!/cava/
+!/hypr/
+

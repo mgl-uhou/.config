@@ -1,0 +1,9 @@
+### Variáveis
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term kitty
+# Rofi como launcher (igual ao seu sxhkd)
+set $menu rofi -show drun -show-icons

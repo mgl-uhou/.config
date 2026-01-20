@@ -1,0 +1,6 @@
+### Output configuration
+# Wallpaper (Substituindo nitrogen)
+output * bg /home/mgl_uhou/Pictures/Wallpapers/stars.jpg fill
+
+# Monitor (Exemplo baseado no seu bspwmrc, ajuste a resolução se necessário)
+output HDMI-A-1 resolution 1920x1080 position 0,0

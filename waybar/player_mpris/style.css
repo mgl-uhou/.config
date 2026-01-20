@@ -1,0 +1,51 @@
+/* -----------------------------------------------------------------------------
+ * Player MPRIS Styles (Isolated)
+ * -------------------------------------------------------------------------- */
+
+/* Container do Grupo (A ilha rosa) */
+#music {
+    background-color: @pink;
+    border-radius: 10px;
+    margin: 8px 5px 0px 5px;
+    padding: 0;
+    border: none;
+}
+
+/* Estilo para todos os itens internos */
+#music > * {
+    background-color: transparent;
+    color: #333333;
+    margin: 0;
+    padding: 0 5px;
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+}
+
+/* Botão Anterior */
+#custom-media-prev {
+    padding-left: 12px;
+    padding-right: 10px;
+    border-radius: 10px 0 0 10px;
+}
+
+/* Botão Próximo */
+#custom-media-next {
+    padding-right: 12px;
+    padding-left: 10px;
+    border-radius: 0 10px 10px 0;
+}
+
+#custom-media-prev, #custom-media-next {
+    color: #333333;
+}
+
+/* Texto Central (Com as bordas laterais que você gosta) */
+#custom-music {
+    font-weight: bold;
+    padding: 0 15px;
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;
+    color: #333333;
+    margin: 4px 0;
+}

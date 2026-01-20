@@ -1,0 +1,19 @@
+# Configuração do Sway (Modularizada)
+#
+# Arquivos de configuração estão em ~/.config/sway/config.d/
+#
+# Estrutura:
+# 01-variables: Variáveis globais ($mod, $term, etc.)
+# 02-output:    Configuração de monitores e wallpaper
+# 03-input:     Teclado, mouse e touchpad
+# 04-theme:     Cores, bordas, gaps e efeitos visuais
+# 05-autostart: Aplicativos iniciados com o Sway
+# 06-bindings:  Atalhos de teclado
+# 07-bar:       Configuração da barra de status (Waybar)
+#
+
+# Carrega todos os módulos em ordem alfabética/numérica
+include ~/.config/sway/config.d/*
+
+# Permite configurações específicas do sistema (se existirem em /etc/sway/config.d)
+include /etc/sway/config.d/*

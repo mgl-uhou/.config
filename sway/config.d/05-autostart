@@ -1,0 +1,33 @@
+### Autostart (Migrado do bspwmrc)
+# Atualiza ambiente DBus/Systemd (Importante para variáveis como GTK_IM_MODULE)
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP GTK_IM_MODULE QT_IM_MODULE
+
+# Polkit
+exec /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+# Rede
+exec nm-applet --indicator
+# Notificações
+exec dunst
+# KDE Connect
+exec /usr/lib/x86_64-linux-gnu/libexec/kdeconnectd
+exec kdeconnect-indicator
+# Proteção de tela (xss-lock funciona com swaylock)
+exec xss-lock --transfer-sleep-lock -- swaylock -f -c 000000
+
+# Idle Configuration (Swayidle)
+# Desliga/Suspende após 15min (900s) de inatividade
+# Respeita o idle_inhibitor do Waybar automaticamente (áudio/vídeo/botão)
+exec swayidle -w \
+    timeout 900 '/home/mgl_uhou/.config/sway/scripts/autosuspend.sh'
+
+# Redshift (Gammastep é a alternativa para Wayland, mas redshift as vezes funciona)
+exec gammastep-indicator
+
+# Enable clipboard manager
+exec wl-paste --watch /home/mgl_uhou/.local/bin/cliphist store -max-items 25
+
+# Add this to ensure variables pass
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+# Enable auto tiling (Caminho absoluto para garantir execução via pyenv)
+exec_always /home/mgl_uhou/.pyenv/shims/autotiling

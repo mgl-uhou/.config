@@ -1,0 +1,34 @@
+/*****----- Configuration -----*****/
+configuration {
+    show-icons:                 false;
+}
+
+/*****----- Global Properties -----*****/
+@import "simple-menu.rasi"
+
+/* Ajustes específicos para Clipboard */
+window {
+    /* Largura maior para textos longos */
+    width:                       60%;
+    /* Altura ajustada: calc(100% - 200px) simula o padding de 100px em cima e embaixo */
+    height:                      calc(100% - 200px);
+    
+    /* Garantir que não toque nas bordas */
+    anchor:                      center;
+    location:                    center;
+}
+
+listview {
+    /* Não fixar linhas, deixar ocupar o espaço disponível da janela */
+    fixed-height:                false;
+    lines:                       15; /* valor inicial, mas vai expandir */
+}
+
+element-text {
+    /* Alinhado à esquerda */
+    horizontal-align:            0.0;
+}
+
+inputbar {
+    enabled:                     true;
+}

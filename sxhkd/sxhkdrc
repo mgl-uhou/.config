@@ -1,0 +1,162 @@
+#  ~/.config/sxhkd/sxhkdrc
+
+# --- Comandos Principais ---
+
+# Terminal (Mesmo do i3)
+super + Return
+    kitty
+
+# Launcher (Rofi)
+super + d
+    rofi -show drun -show-icons
+
+# Menu de Energia (Seu script existente)
+super + shift + e
+    ~/.config/rofi/powermenu/powermenu.sh
+
+# Recarregar configuração do sxhkd e o bspwm
+super + shift + c
+    pkill -USR1 -x sxhkd && bspc wm -r
+
+# Recarregar o BSPWM
+# super + shift + r
+    # bspc wm -r
+
+# Sair do BSPWM (Logout)
+# super + shift + q
+#    bspc quit
+
+# Fechar Janela (Kill)
+super + q
+    bspc node -c
+
+# Apps
+
+super + y
+    kitty -e yazi
+
+super + t
+    thunar
+
+# Pavulcontrol
+# A2DP, codec SBC-XQ -> Extreme Quality (opção para somente ouvir em alta qualidade).
+# A2DP, codec SBC -> Good Quality (opção segura para somente ouvir pelos fones).
+# HSP/HFP, codec mSBC -> Good (áudio ok e boa qualidade de voz para chamadas).
+# HSP/HFP, codec CVSD -> Good (áudio ok e qualidade de voz um pouco inferior para chamadas).
+
+super + p
+    pavucontrol
+
+# --- Gerenciamento de Janelas ---
+
+# Alternar Tiled/Floating (Tornar flutuante)
+super + shift + space
+    bspc node -t '~floating'
+
+# Fullscreen
+super + f
+    bspc node -t '~fullscreen' 
+
+# --- "Minimizar" (Scratchpad logic do BSPWM) ---
+# Esconde a janela atual (Hidden)
+super + shift + minus
+    bspc node -g hidden=on
+
+# Mostra a última janela escondida
+super + minus
+    bspc node $(bspc query -N -n .hidden -d focused | tail -n1) -g hidden=off -f
+
+# --- Foco e Movimento (Vim Keys hjkl) ---
+
+# Mudar foco (h, j, k, l)
+super + {h,j,k,l}
+    bspc node -f {west,south,north,east}
+
+# Mover janela (Shift + h, j, k, l)
+super + shift + {h,j,k,l}
+    bspc node -s {west,south,north,east}
+
+# --- Workspaces (1-10) ---
+
+# Focar Workspace
+super + {1-9,0}
+    bspc desktop -f '^{1-9,10}'
+
+# Mover janela para Workspace
+super + shift + {1-9,0}
+    bspc node -d '^{1-9,10}'
+
+# --- Pré-seleção (Manual Tiling) ---
+# Isso permite que você diga onde a próxima janela vai abrir (útil para controle manual)
+super + ctrl + {h,j,k,l}
+    bspc node -p {west,south,north,east}
+
+# Cancelar pré-seleção
+super + ctrl + space
+    bspc node -p cancel
+
+# --- Redimensionar (Resize) ---
+
+# Opção 1: Usando Super + Alt + HJKL (Original)
+super + alt + {h,j,k,l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# Opção 2: Usando Super + Setas (Nova adição)
+# Expande a borda na direção da seta pressionada
+super + {Left,Down,Up,Right}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# --- Multimídia e Hardware ---
+
+# Printscreen (Flameshot)
+Print
+    flameshot gui
+shift + Print
+    flameshot full -p ~/Pictures/Screenshots/
+
+# Volume
+XF86AudioRaiseVolume
+    pactl set-sink-volume @DEFAULT_SINK@ +5%
+XF86AudioLowerVolume
+    pactl set-sink-volume @DEFAULT_SINK@ -5%
+XF86AudioMute
+    pactl set-sink-mute @DEFAULT_SINK@ toggle
+XF86AudioMicMute
+    pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+# --- Bluetooth ---
+
+# Conectar Fone Bluetooth (Tenta conectar e avisa o resultado)
+super + b
+    bluetoothctl connect 00:BB:43:D5:B3:01 && notify-send -u low "Redmi Buds 6 Play" "Connected." || notify-send -u critical "Bluetooth" "Failure to connect."
+
+# Desconectar Fone Bluetooth (Opcional, caso queira economizar bateria do fone)
+super + shift + b
+    bluetoothctl disconnect 00:BB:43:D5:B3:01 && notify-send -u low "Redmi Buds 6 Play" "Desconnected."
+
+    # --- Notificações (Dunst) ---
+
+# Fechar notificação (Usando 'ponto' para ser rápido)
+super + period
+    dunstctl close
+
+# Fechar todas as notificações
+super + shift + period
+    dunstctl close-all
+
+# Histórico (Reabrir última notificação)
+super + grave
+    dunstctl history-pop
+
+# Ações (Ex: abrir link dentro da notificação)
+super + shift + return
+    dunstctl action
+
+# --- KDE Connect ---
+
+# Send clipboard content
+super + c
+    kdeconnect-cli -d b3d59fcc6fe44d60829955e228bee614 --share-text "$(xclip -o -selection clipboard)"
+
+super + f12
+    kdeconnect-cli -d b3d59fcc6fe44d60829955e228bee614 --ring

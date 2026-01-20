@@ -1,0 +1,19 @@
+/**
+ *
+ * Author : Aditya Shakya (adi1090x)
+ * Github : @adi1090x
+ * 
+ * Colors
+ **/
+
+ // Colours: https://paletadecores.com/paleta/9a3732/b36159/cd8a80/e6b4a8/ffdecf/
+
+* {
+    background:     #282828FF;
+    background-alt: #353535FF; 
+    border:         #CD8A80FF;
+    foreground:     #FFDECFFF;
+    selected:       #E6B4A8FF;
+    active:         #B36159FF;
+    urgent:         #9A3732FF;
+}

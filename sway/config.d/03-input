@@ -1,0 +1,17 @@
+### Input configuration
+# Configuração de teclado (US Internacional)
+input * {
+    xkb_layout "us"
+    xkb_variant "intl"
+}
+
+# Touchpad (se houver)
+input type:touchpad {
+    dwt enabled
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+
+# Mouse Focus Behavior
+focus_follows_mouse no
