@@ -2,39 +2,28 @@
 
 DEVICE_ID="b3d59fcc6fe44d60829955e228bee614"
 
-# Tenta qdbus-qt5 (comum no Zorin/Ubuntu) ou qdbus
-if command -v qdbus-qt5 &> /dev/null; then
-    QDBUS_CMD="qdbus-qt5"
-else
-    QDBUS_CMD="qdbus"
-fi
+# Função para pegar propriedade via busctl
+get_prop() {
+    # $1: Interface, $2: Property
+    busctl --user get-property org.kde.kdeconnect /modules/kdeconnect/devices/$DEVICE_ID/$1 org.kde.kdeconnect.device.$1 $2 2>/dev/null | awk '{print $2}'
+}
 
-STATUS=$($QDBUS_CMD org.kde.kdeconnect /modules/kdeconnect/devices/$DEVICE_ID org.kde.kdeconnect.device.isReachable 2>/dev/null)
+# Verifica se está alcançável (busctl retorna "true" ou "false")
+STATUS=$(busctl --user get-property org.kde.kdeconnect /modules/kdeconnect/devices/$DEVICE_ID org.kde.kdeconnect.device isReachable 2>/dev/null | awk '{print $2}')
 
 if [ "$STATUS" = "true" ]; then
-    BATTERY=$($QDBUS_CMD org.kde.kdeconnect /modules/kdeconnect/devices/$DEVICE_ID/battery org.kde.kdeconnect.device.battery.charge)
-    CHARGING=$($QDBUS_CMD org.kde.kdeconnect /modules/kdeconnect/devices/$DEVICE_ID/battery org.kde.kdeconnect.device.battery.isCharging)
+    BATTERY=$(get_prop "battery" "charge")
+    CHARGING=$(get_prop "battery" "isCharging")
 
-    # 1. Ícone do Celular (Sempre aparece primeiro)
+    # 1. Ícone do Celular
     PHONE_ICON=""
 
-    # 2. Ícone da Bateria (Muda se carrega ou não)
+    # 2. Ícone da Bateria
     if [ "$CHARGING" = "true" ]; then
         PHONE_ICON="󱐌"
-        # BAT_ICON="󰂄" 
-    # else
-    #     if [ "$BATTERY" -le 15 ]; then
-    #         BAT_ICON="󰂃" 
-    #     elif [ "$BATTERY" -le 50 ]; then
-    #         BAT_ICON="󰁼"
-    #     elif [ "$BATTERY" -le 90 ]; then
-    #         BAT_ICON="󰂀"
-    #     else
-    #         BAT_ICON="󰁹"
-    #     fi
     fi
     
-    # Resultado: [Celular] [Status Bateria] [Valor]%
+    # Resultado: [Icone] [Valor]%
     echo "$PHONE_ICON  $BATTERY%"
 else
     echo "" 

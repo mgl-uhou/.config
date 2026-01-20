@@ -8,6 +8,7 @@
   "modules-left": [
     "custom/launcher",
     "sway/workspaces",
+    "hyprland/workspaces",
     "tray",
     "custom/cava-internal",
     "group/music",

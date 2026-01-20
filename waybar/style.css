@@ -67,13 +67,15 @@ window#waybar {
     padding: 0px 10px;
 }
 
-#workspaces button.focused {
+#workspaces button.focused,
+#workspaces button.active {
     color: @mauve;
     border-radius: 20px;
     /* background-color: @flamingo; */
 }
 
-#workspaces button.focused * {
+#workspaces button.focused *,
+#workspaces button.active * {
     color: @mauve;
 }
 
@@ -238,7 +240,8 @@ window#waybar {
 }
 
 /* First item in the group (Audio) */
-#stats #pulseaudio {
+#stats #pulseaudio,
+#stats #wireplumber {
     border-radius: 10px 0 0 10px;
     padding-left: 10px; /* Ajustado de 15px para 10px */
     padding-right: 8px;
