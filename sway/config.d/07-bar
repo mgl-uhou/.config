@@ -1,6 +1,7 @@
 #
 # --- Status Bar ---
 #
-bar {
-    swaybar_command waybar
-}
+# A barra é gerenciada via autostart (exec_always) para melhor controle de argumentos.
+# bar {
+#    swaybar_command waybar -c /home/mgl_uhou/.config/waybar/config.sway
+# }

@@ -31,3 +31,5 @@ exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DE
 
 # Enable auto tiling (Caminho absoluto para garantir execução via pyenv)
 exec_always /home/mgl_uhou/.pyenv/shims/autotiling
+
+exec_always waybar -c /home/mgl_uhou/.config/waybar/config.sway
