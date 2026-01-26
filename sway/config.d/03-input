@@ -14,4 +14,7 @@ input type:touchpad {
 }
 
 # Mouse Focus Behavior
-focus_follows_mouse no
+focus_follows_mouse yes
+
+# Move mouse to the center of the window when focus changes
+mouse_warping container
