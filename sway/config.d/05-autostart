@@ -29,6 +29,10 @@ exec wl-paste --watch /home/mgl_uhou/.local/bin/cliphist store -max-items 25
 # Add this to ensure variables pass
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
 
+# Exec blueman-manage to bluetooth controls
+exec --no-startup-id blueman-applet
+exec --no-startup-id blueman-manager
+
 # Enable auto tiling (Caminho absoluto para garantir execução via pyenv)
 exec_always /home/mgl_uhou/.pyenv/shims/autotiling
 
